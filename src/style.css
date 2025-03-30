@@ -1,0 +1,113 @@
+:root {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.5;
+  font-weight: bold;
+  color-scheme: dark;
+  background-color: #1a101a; /* Default body background */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Define base aspect ratio for the game */
+  --game-aspect-ratio: 1000 / 450;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent scrollbars */
+  background-color: #1a101a;
+  display: flex; /* Use flexbox for centering */
+  justify-content: center;
+  align-items: center;
+}
+
+#game-container {
+  position: relative;
+  /* Use aspect-ratio and max dimensions */
+  aspect-ratio: var(--game-aspect-ratio);
+  width: 95vw; /* Max width relative to viewport width */
+  max-width: calc(95vh * var(--game-aspect-ratio)); /* Max width based on height */
+  height: 95vh; /* Max height relative to viewport height */
+  max-height: calc(95vw / var(--game-aspect-ratio)); /* Max height based on width */
+
+  background-color: #300032; /* Default background, JS will override */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Default shadow */
+  overflow: hidden; /* Ensure nothing spills out */
+  font-size: 1.5vmin; /* Base font size on viewport minimum dimension */
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensure canvas content scales correctly */
+}
+
+/* General positioning and font styles for UI elements */
+#score, #message, #instructions, #game-over {
+  position: absolute;
+  /* Use em for scaling with container font-size */
+  font-size: 1.8em; /* Adjust base size if needed */
+  padding: 0.4em 0.8em;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  white-space: nowrap; /* Prevent text wrapping */
+  /* Colors and text-shadows set in game.ts applyTheme */
+}
+
+#score {
+  top: 1.5em;
+  left: 1.5em;
+}
+
+#message {
+  top: 4em; /* Position below score */
+  left: 1.5em;
+  font-style: normal;
+  max-width: 80%; /* Prevent message from becoming too wide */
+  white-space: normal; /* Allow message text to wrap */
+}
+
+#instructions {
+  bottom: 1.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5em; /* Slightly smaller instructions */
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#game-over {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3.5em; /* Larger game over text */
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 1em 1.5em;
+  border-radius: 10px;
+  border-width: 3px;
+  border-style: solid;
+  white-space: normal; /* Allow game over text to wrap */
+  /* Color, border-color, text-shadow set in game.ts applyTheme */
+}
+
+.hidden {
+  display: none;
+}
+
+/* Optional: Media query for very small screens if needed */
+@media (max-width: 480px) {
+  #game-container {
+    font-size: 1.8vmin; /* Slightly larger base font on small screens */
+  }
+  #score, #message, #instructions, #game-over {
+     /* Adjust padding or font-size further if necessary */
+  }
+}
